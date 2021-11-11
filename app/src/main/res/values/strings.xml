@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MigoTask</string>
+
+    <string name="data_empty">Contacts is empty</string>
+    <string name="retry">Please Retry</string>
+    <string name="press_again_exit">Press again to exit App</string>
+    <string name="contacts_title">Contacts</string>
+    <string name="contacts_starred">Starred</string>
+    <string name="contacts_all">All</string>
+</resources>
