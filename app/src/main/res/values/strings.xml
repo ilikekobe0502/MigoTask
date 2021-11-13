@@ -6,5 +6,21 @@
     <string name="press_again_exit">Press again to exit App</string>
     <string name="contacts_title">Contacts</string>
     <string name="contacts_starred">Starred</string>
-    <string name="contacts_all">All</string>
+
+    <!--  Pass page  -->
+    <string name="pass_btn_buy">Buy</string>
+    <string name="pass_btn_activated">Activated</string>
+    <string name="pass_btn_add_days">Add Days</string>
+    <string name="pass_btn_add_hours">Add Hours</string>
+    <string name="pass_day_title">Day Pass</string>
+    <string name="pass_hour_title">Hours Pass</string>
+    <string name="pass_day_content_title">%d Day Pass</string>
+    <string name="pass_hour_content_title">%d Hours Pass</string>
+    <string name="pass_money">RP %d</string>
+    <string name="pass_status">Pass Status: %s</string>
+    <string name="pass_insertion_time">Insertion time: %s</string>
+    <string name="pass_activation_time">Activation time: %s</string>
+    <string name="pass_expiration_time">Expiration time: %s</string>
+    <string name="pass_status_activated">Activated</string>
+    <string name="pass_status_inactivated">Inactivated</string>
 </resources>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/day_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_space_x2"
+        android:inputType="numberDecimal"
+        android:hint="0"
+        app:layout_constraintEnd_toStartOf="@id/day_suffix_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/day_suffix_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pass_day_title"
+        app:layout_constraintBottom_toBottomOf="@id/day_et"
+        app:layout_constraintStart_toEndOf="@id/day_et"
+        app:layout_constraintTop_toTopOf="@id/day_et" />
+
+    <Button
+        android:id="@+id/add_days_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_space_x2"
+        android:text="@string/pass_btn_add_days"
+        app:layout_constraintBottom_toBottomOf="@id/day_et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/day_et" />
+
+    <EditText
+        android:id="@+id/hour_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_space_x2"
+        android:inputType="numberDecimal"
+        android:hint="0"
+        app:layout_constraintEnd_toStartOf="@id/hour_suffix_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/day_et" />
+
+    <TextView
+        android:id="@+id/hour_suffix_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pass_hour_title"
+        app:layout_constraintBottom_toBottomOf="@id/hour_et"
+        app:layout_constraintStart_toEndOf="@id/hour_et"
+        app:layout_constraintTop_toTopOf="@id/hour_et" />
+
+    <Button
+        android:id="@+id/add_hours_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_space_x2"
+        android:text="@string/pass_btn_add_hours"
+        app:layout_constraintBottom_toBottomOf="@id/hour_et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/hour_et" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pass_list_rv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_hours_btn" />
+</androidx.constraintlayout.widget.ConstraintLayout>

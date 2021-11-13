@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/margin_space_x3"
+    android:layout_marginVertical="@dimen/margin_space"
+    android:background="@drawable/bg_pass_item">
+
+    <Button
+        android:id="@+id/activity_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_space_x2"
+        android:layout_marginVertical="@dimen/margin_space"
+        app:layout_constraintBottom_toBottomOf="@id/money_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tool:text="@string/pass_btn_buy" />
+
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_space_x2"
+        android:textColor="@color/blue"
+        app:layout_constraintBottom_toTopOf="@id/money_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tool:text="1 Day Pass" />
+
+    <TextView
+        android:id="@+id/money_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_space_x2"
+        android:paddingVertical="@dimen/margin_space"
+        android:textColor="@color/blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_tv"
+        tool:text="RP 1.00" />
+
+    <TextView
+        android:id="@+id/status_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/margin_space"
+        android:text="@string/pass_status"
+        app:layout_constraintStart_toStartOf="@id/money_tv"
+        app:layout_constraintTop_toBottomOf="@id/money_tv" />
+
+    <TextView
+        android:id="@+id/insertion_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/margin_space"
+        android:text="@string/pass_insertion_time"
+        app:layout_constraintStart_toStartOf="@id/status_tv"
+        app:layout_constraintTop_toBottomOf="@id/status_tv" />
+
+    <TextView
+        android:id="@+id/activate_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/margin_space"
+        android:text="@string/pass_activation_time"
+        app:layout_constraintStart_toStartOf="@id/status_tv"
+        app:layout_constraintTop_toBottomOf="@id/insertion_time_tv" />
+
+    <TextView
+        android:id="@+id/expiration_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/margin_space"
+        android:text="@string/pass_expiration_time"
+        app:layout_constraintStart_toStartOf="@id/status_tv"
+        app:layout_constraintTop_toBottomOf="@id/activate_time_tv" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/detail_gp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="status_tv,insertion_time_tv,activate_time_tv,expiration_time_tv" />
+</androidx.constraintlayout.widget.ConstraintLayout>

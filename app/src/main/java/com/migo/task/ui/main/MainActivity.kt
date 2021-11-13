@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.migo.task.R
 import com.migo.task.ui.base.BaseActivity
-import com.migo.task.ui.contacts.ContactsFragment
+import com.migo.task.ui.pass.PassFragment
 import com.migo.task.utils.utility.GeneralUtils
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,7 +16,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        navigateTo(ContactsFragment())
+        navigateTo(PassFragment())
     }
 
     override fun onBackPressed() {

@@ -2,7 +2,7 @@ package com.migo.task.di
 
 import android.content.Context
 import androidx.room.Room
-import com.migo.task.model.db.ContactsDatabase
+import com.migo.task.model.db.PassDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,16 +16,16 @@ object DBModule {
 
     @Singleton
     @Provides
-    fun provideContactsDatabase(@ApplicationContext appContext: Context): ContactsDatabase {
+    fun provideContactsDatabase(@ApplicationContext appContext: Context): PassDatabase {
         return Room.databaseBuilder(
                 appContext,
-                ContactsDatabase::class.java,
-                ContactsDatabase::class.java.simpleName
-        ).build()
+                PassDatabase::class.java,
+                PassDatabase::class.java.simpleName
+        ).fallbackToDestructiveMigration().build()
     }
 
     @Singleton
     @Provides
-    fun provideContactsDao(db: ContactsDatabase) = db.ContactsDao()
+    fun provideContactsDao(db: PassDatabase) = db.PassDao()
 }
 
