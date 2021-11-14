@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ApiStatus(
     @SerializedName("status")
-    val result: Int,
+    val status: Int,
     @SerializedName("message")
     val message: String
 )

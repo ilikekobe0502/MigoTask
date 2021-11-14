@@ -17,8 +17,8 @@ import kotlinx.coroutines.launch
 import org.joda.time.DateTime
 import retrofit2.HttpException
 
-private const val HOURS_PRICE = 10
-private const val DAYS_PRICE = 100
+const val HOURS_PRICE = 10
+const val DAYS_PRICE = 100
 
 class PassViewModel @ViewModelInject constructor(
     private var migoRepository: ApiRepository,
@@ -43,10 +43,10 @@ class PassViewModel @ViewModelInject constructor(
                 emit(resp.body())
             }
                 .onStart {
-                    emit(ApiStatus(result = -1, message = "Loading"))
+                    emit(ApiStatus(status = -1, message = "Loading"))
                 }
                 .catch {
-                    emit(ApiStatus(result = -1, message = it.message ?: "Error"))
+                    emit(ApiStatus(status = -1, message = it.message ?: "Error"))
                 }
                 .collect {
                     _apiResult.postValue(it?.message)
