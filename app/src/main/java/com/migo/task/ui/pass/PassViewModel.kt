@@ -4,37 +4,70 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.migo.task.model.api.ApiResult
-import com.migo.task.model.api.model.response.Contact
+import com.migo.task.model.api.ApiRepository
+import com.migo.task.model.api.model.response.ApiStatus
 import com.migo.task.model.enums.PassType
 import com.migo.task.model.repository.MigoDbRepository
-import com.migo.task.model.repository.MigoRepository
 import com.migo.task.model.vo.Pass
 import com.migo.task.model.vo.PassData
 import com.migo.task.ui.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.zip
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.joda.time.DateTime
+import retrofit2.HttpException
 
 private const val HOURS_PRICE = 10
 private const val DAYS_PRICE = 100
 
 class PassViewModel @ViewModelInject constructor(
-    private var migoRepository: MigoRepository,
+    private var migoRepository: ApiRepository,
     private var migoDbRepository: MigoDbRepository
 ) : BaseViewModel() {
 
     private val _passResult = MutableLiveData<List<PassData>>() // All Pass data liveData
     val passResult: LiveData<List<PassData>> = _passResult
 
+    private val _apiResult = MutableLiveData<String>() // get api status
+    val apiResult: LiveData<String> = _apiResult
+
+    /**
+     * get the network status
+     * @param isWifi
+     */
+    fun getStatus(isWifi: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            flow {
+                val resp = migoRepository.getStatus(isWifi)
+                if (!resp.isSuccessful) throw HttpException(resp)
+                emit(resp.body())
+            }
+                .onStart {
+                    emit(ApiStatus(result = -1, message = "Loading"))
+                }
+                .catch {
+                    emit(ApiStatus(result = -1, message = it.message ?: "Error"))
+                }
+                .collect {
+                    _apiResult.postValue(it?.message)
+                }
+        }
+    }
+
+    /**
+     * display networkError message
+     *
+     * @param message the message you want to show
+     */
+    fun networkError(message: String) {
+        _apiResult.postValue(message)
+    }
 
     /**
      * Get all Pass data
      */
     fun getAllPassData() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             migoDbRepository.fetchPass(passType = PassType.TYPE_DAY)
                 .zip(migoDbRepository.fetchPass(passType = PassType.TYPE_HOUR)) { dayList, hourList ->
                     val passDataList = ArrayList<PassData>()

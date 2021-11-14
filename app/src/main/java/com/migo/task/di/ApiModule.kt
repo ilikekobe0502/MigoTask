@@ -1,18 +1,14 @@
 package com.migo.task.di
 
-import com.migo.task.API_HOST_URL
-import com.migo.task.BuildConfig
-import com.migo.task.model.api.ApiService
 import com.facebook.stetho.okhttp3.StethoInterceptor
-import com.google.gson.Gson
+import com.migo.task.BuildConfig
+import com.migo.task.model.api.ApiRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -49,12 +45,9 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun provideApiService(okHttpClient: OkHttpClient): ApiService {
-        return Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create(Gson()))
-            .client(okHttpClient)
-            .baseUrl(API_HOST_URL)
-            .build()
-            .create(ApiService::class.java)
+    fun provideApiRepository(
+        okHttpClient: OkHttpClient
+    ): ApiRepository {
+        return ApiRepository(okHttpClient)
     }
 }

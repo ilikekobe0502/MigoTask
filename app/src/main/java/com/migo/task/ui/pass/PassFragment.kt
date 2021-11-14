@@ -1,15 +1,15 @@
 package com.migo.task.ui.pass
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.migo.task.R
 import com.migo.task.model.enums.PassType
 import com.migo.task.ui.base.BaseFragment
+import com.migo.task.utils.network.NetworkCallback
 import com.migo.task.utils.utility.GeneralUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_pass.*
@@ -20,6 +20,24 @@ class PassFragment : BaseFragment() {
     private val viewModel: PassViewModel by viewModels()
 
     private var contactsAdapter: PassAdapter? = null
+    private val connectivityManager: ConnectivityManager by lazy {
+        requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    }
+
+    private val networkCallback: NetworkCallback by lazy {
+        NetworkCallback(
+            onCapabilitiesChanged = {
+                viewModel.getStatus(it)
+            },
+            onLost = {
+                viewModel.networkError(getString(R.string.error_network_unavailable))
+            }
+        )
+    }
+
+    /**
+     * Declare Closure for recyclerView's click event
+     */
 
     /**
      * Declare Closure for recyclerView's click event
@@ -44,12 +62,26 @@ class PassFragment : BaseFragment() {
         viewModel.getAllPassData()
     }
 
+    override fun onResume() {
+        super.onResume()
+        connectivityManager.registerDefaultNetworkCallback(networkCallback)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        connectivityManager.unregisterNetworkCallback(networkCallback)
+    }
+
     /**
      * set observe listener
      */
     private fun setObserve() {
         viewModel.passResult.observe(viewLifecycleOwner, {
             contactsAdapter?.updateData(it)
+        })
+
+        viewModel.apiResult.observe(viewLifecycleOwner, {
+            status_tv.text = getString(R.string.pass_api_status, it)
         })
     }
 

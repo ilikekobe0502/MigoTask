@@ -4,8 +4,7 @@
     <string name="data_empty">Contacts is empty</string>
     <string name="retry">Please Retry</string>
     <string name="press_again_exit">Press again to exit App</string>
-    <string name="contacts_title">Contacts</string>
-    <string name="contacts_starred">Starred</string>
+    <string name="error_network_unavailable">Network is unavailable</string>
 
     <!--  Pass page  -->
     <string name="pass_btn_buy">Buy</string>
@@ -23,4 +22,5 @@
     <string name="pass_expiration_time">Expiration time: %s</string>
     <string name="pass_status_activated">Activated</string>
     <string name="pass_status_inactivated">Inactivated</string>
+    <string name="pass_api_status">API status: %s</string>
 </resources>
